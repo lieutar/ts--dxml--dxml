@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sec lang="ja">
+  <title>dxml</title>
+  XML document draft format.
+
+  <d>
+    `dxml` はシンプルなフォーマットで要素としては `sec`, `title`, `d` というものしか持ちません。
+    <d lang="en">
+      `dxml` is a simple format and having only following elements: `sec`, `title`, `d`.
+    </d>
+  </d>
+  <d>
+    これだけで何故文書フォーマットたりえるのか、それは dxml の Text Node に Markdown が書けるためで、
+    ではなぜ Markdown では駄目なのかと言えば、Markdown では複数の言語による表記を混在させ、
+    必要に応じたものだけを抜き出すといった処理ができないためです。
+    <d lang="en">
+      Why does this alone qualify as a document format?
+      Because Markdown can be written in dxml Text Nodes.
+      So why isn't Markdown sufficient?
+      Because Markdown doesn't allow for mixing notations in multiple languages
+      and extracting only the necessary ones.
+    </d>
+  </d>
+  <d>
+    最適なのは Markdown をより拡張するような軽量マークアップ言語とそのパーサを書くことですが、
+    それはすぐに出来るものではありません。しかし、xml ならば既存のパーサがありますし、
+    細かなマークアップについては、Markdown の力を借り、既存の Markdown パーサに通すという形が、
+    最も少ない工数でこの目的に叶うソリューションを作りだすものになります。
+    <d lang="en">
+      The optimal solution would be to write a lightweight markup language that extends Markdown and its parser,
+      but that's not something that can be done immediately.
+      However, there are existing parsers for XML, and for detailed markup,
+      borrowing the power of Markdown and running it through an existing Markdown parser
+      would be the solution that meets this goal with the least amount of effort.
+    </d>
+  </d>  
+  <sec><!--==================================================================-->
+    <title>INSTALLATION</title>
+    <d>
+      現在、ワークスペース内での開発にのみ対応しており、公式なインストール方法はありません。
+      <d lang="en">
+        Now time, this project is supported for development on my workspace, and
+        this don't provide regular way to install.
+      </d>
+    </d>
+  </sec>
+  <sec><!--==================================================================-->
+    <title>elements</title>
+    <sec>
+      <title>`&lt;sec&gt;`</title>
+      <d>すべての文書の基本的なコンテナ。ルート要素になることができるもの。</d>
+      <d>`&lt;sec&gt;`はネストすることができ、ネストによりレベルを示すことができる。</d>
+      <d>ルート要素の `lang` 属性は`&lt;d&gt;`要素のデフォルトの同属性の値となる。</d>
+    </sec>
+    <sec>
+      <title>`&lt;title&gt;`</title>
+      <d>`&lt;sec&gt;`要素の直下に一つだけ設定されるセクションのタイトル。</d>
+    </sec>
+    <sec>
+      <title>`&lt;d&gt;`</title>
+      <d>ドラフト要素。</d>
+      <d>一段階までネストすることができ、`lang`属性によって親`&lt;d&gt;`要素の別言語オルタナティヴを設定できる。</d>
+    </sec>
+  </sec>
+  <sec><!--==================================================================-->
+    <title></title>
+  </sec>
+</sec>

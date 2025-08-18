@@ -1,30 +1,44 @@
 {
   "name": "dxml",
-  "private": true,
   "version": "0.0.1",
+  "private": true,
   "description": "",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": ",/dist/index.cjs"
+      "import": "./src/index.ts"
     }
   },
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "tsup": "^8.5.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+    "build": "tsc -p tsconfig.build.json",
+    "check": "bun run lint && bun run typecheck",
+    "clean": "rm -r dist",
+    "coverage": "vitest: --coverage",
+    "coverage:bun": "bun test --coverage",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "test": "vitest",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit"
   },
   "dependencies": {
+    "domlib": "*",
     "fp-ts": "^2.16.10",
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
     "unified": "^11.0.5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@vitest/coverage-v8": "latest",
+    "depcheck": "latest",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "looper-ts": "*",
+    "vitest": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
   }
 }

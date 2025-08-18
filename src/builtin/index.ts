@@ -32,6 +32,13 @@ export function builtinStyles(_window: IWindow): {[key:string]:DOMProcessor}{
               .replace(/^[\s\n]*/,'')
               .replace(/\n*$/, "\n\n"); } },
         {
+          element: 'code',
+          action(n:Node){
+            const lang = (n as Element).getAttribute('lang');
+            const begin = '```' + (lang ? ' '+lang : '') + '\n';
+            return begin + String(this.processChildren(n)).replace(/\n*$/, "\n") + '```\n';
+          } },
+        {
           element: 'listItem',
           action(n:Node){
             const indent = '  '.repeat(context.current.indentDepth);

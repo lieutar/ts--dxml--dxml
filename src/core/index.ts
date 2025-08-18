@@ -1,5 +1,5 @@
-import { trimDraft } from './trimDraft';
 import { isElementNode, newDocument, xmldomFromFile, type IWindow } from 'domlib';
+import { trimDraft } from './trimDraft';
 import { prepareDxmlElement } from './prepare';
 
 import { pipe } from 'fp-ts/function';
@@ -22,8 +22,8 @@ export function processDxml(params: processDxmlParams): TE.TaskEither<Error, Doc
   return pipe(
     TE.tryCatch(
       () => {
-        if('string' === typeof (params as any).file)
-          return xmldomFromFile(window, (params as any).file);
+        if('string' === typeof (params as any).file){
+          return xmldomFromFile(window, (params as any).file); }
         return Promise.resolve((params as any).doc as Document);
       },
       (reason) => new Error(`Failed to read or parse XML file: ${String(reason)}`)
