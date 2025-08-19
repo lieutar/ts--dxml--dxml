@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <sec lang="ja">
   <title>dxml</title>
-  XML for draft.
+  <paragraph>
+    <img src="https://img.shields.io/badge/-TYPESCRIPT-informational?logo=TypeScript&amp;style=flat&amp;logoColor=1a5fb4&amp;color=1a5fb4&amp;labelColor=f6f5f4" alt="Powerd by TypeScript" />
+    <img src="https://img.shields.io/badge/-xml-informational?logo=xml&amp;style=flat&amp;logoColor=26a269&amp;color=26a269&amp;labelColor=f6f5f4" alt="Powerd by XML"/>
+  </paragraph>
 
   <d>
-    `dxml` はシンプルなフォーマットで要素としては `sec`, `title`, `d`というものしか持ちません。
+    XML for draft.
+  </d>
+
+  <d>
+    `dxml` はシンプルなフォーマットで独自の要素としては `sec`, `title`, `d`というものしか持ちません。
     <d lang="en">
-      `dxml` is a simple format and having only following elements: `sec`, `title`, `d`.
+      `dxml` is a simple format and having only following unique elements: `sec`, `title`, `d`.
     </d>
   </d>
   <d>
@@ -47,19 +54,52 @@
   <sec><!--==================================================================-->
     <title>Elements</title>
     <sec>
-      <title>`&lt;sec&gt;`</title>
-      <d>すべての文書の基本的なコンテナ。ルート要素になることができるもの。</d>
-      <d>`&lt;sec&gt;`はネストすることができ、ネストによりレベルを示すことができる。</d>
-      <d>ルート要素の `lang` 属性は`&lt;d&gt;`要素のデフォルトの同属性の値となる。</d>
+      <title>Unique Elements</title>
+      <sec>
+        <title>`&lt;sec&gt;`</title>
+        <d>すべての文書の基本的なコンテナ。ルート要素になることができるもの。</d>
+        <d>`&lt;sec&gt;`はネストすることができ、ネストによりレベルを示すことができる。</d>
+        <d>ルート要素の `lang` 属性は`&lt;d&gt;`要素のデフォルトの同属性の値となる。</d>
+      </sec>
+      <sec>
+        <title>`&lt;title&gt;`</title>
+        <d>`&lt;sec&gt;`要素の直下に一つだけ設定されるセクションのタイトル。</d>
+      </sec>
+      <sec>
+        <title>`&lt;d&gt;`</title>
+        <d>ドラフト要素。</d>
+        <d>一段階までネストすることができ、`lang`属性によって親`&lt;d&gt;`要素の別言語オルタナティヴを設定できる。</d>
+      </sec>
     </sec>
     <sec>
-      <title>`&lt;title&gt;`</title>
-      <d>`&lt;sec&gt;`要素の直下に一つだけ設定されるセクションのタイトル。</d>
+      <title>HTML Elements</title>
+      <d>
+        [GFM](https://github.github.com/gfm/) では HTML 要素を入れ込むことができますが、dxml で入れ込むときは、
+        XML 要素として書きます。
+      </d>
+      <d>
+        このとき、名前空間はデフォルトのもので構いません。(むしろ名前空間を厳格に扱ってはいません)
+      </d>
     </sec>
     <sec>
-      <title>`&lt;d&gt;`</title>
-      <d>ドラフト要素。</d>
-      <d>一段階までネストすることができ、`lang`属性によって親`&lt;d&gt;`要素の別言語オルタナティヴを設定できる。</d>
+      <title>Markdown Elements</title>
+      <d>
+        TextNode は Markdown ですが、dxml パーサは `[remark](https://github.com/remarkjs/remark)` を通し
+        POJO AST 化したものを、機械的に XML に変換します。
+      </d>
+      <d>
+        その為それによって生成され得る要素は dxml 内に直接書くことができます。たとえば以下のようにです。
+      </d>
+      ``` xml
+      &lt;paragraph&gt;
+      &lt;img src="..." alt=".." /&gt;
+      &lt;/paragraph&gt;
+      This is new paraguraph.
+      ```
+      <d>
+        これは殆どの場合には不要なテクニックですが、この例のように
+        HTML 要素に続くパラグラフを別のものとして扱いたい場合などに使えます。
+      </d>
     </sec>
   </sec>
   <sec><!--==================================================================-->

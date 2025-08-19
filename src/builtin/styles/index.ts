@@ -47,6 +47,12 @@ export function builtinStyles(_window: IWindow): {[key:string]:DOMProcessor}{
             const children = String(this.processChildren(n)).replace(/\n*$/, '').replace(/\n/g, '\n'+ fIndent);
             return (bullet+" " + children).replace(/\n*$/, "\n\n");}},
         {
+          element: 'img',
+          action(n:Node){
+            const e = n as Element;
+            return `<img src="${e.getAttribute('src')}" alt="${e.getAttribute('alt')}">` }
+        },
+        {
           element: 'link',
           action(n:Node){ return ' [' + this.processChildren(n) + '](' + (n as Element).getAttribute('url') + ') ' } },
         {
