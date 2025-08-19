@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <sec lang="ja">
   <title>dxml</title>
-  XML document draft format.
+  XML for draft.
 
   <d>
-    `dxml` はシンプルなフォーマットで要素としては `sec`, `title`, `d` というものしか持ちません。
+    `dxml` はシンプルなフォーマットで要素としては `sec`, `title`, `d`というものしか持ちません。
     <d lang="en">
       `dxml` is a simple format and having only following elements: `sec`, `title`, `d`.
     </d>
@@ -35,17 +35,17 @@
     </d>
   </d>  
   <sec><!--==================================================================-->
-    <title>INSTALLATION</title>
+    <title>Installation</title>
     <d>
-      現在、ワークスペース内での開発にのみ対応しており、公式なインストール方法はありません。
+      現在、[ワークスペース](ws:/)内での開発にのみ対応しており、公式なインストール方法はありません。
       <d lang="en">
-        Now time, this project is supported for development on my workspace, and
+        Now time, this project is supported for development on my [workspace](ws:/), and
         this don't provide regular way to install.
       </d>
     </d>
   </sec>
   <sec><!--==================================================================-->
-    <title>elements</title>
+    <title>Elements</title>
     <sec>
       <title>`&lt;sec&gt;`</title>
       <d>すべての文書の基本的なコンテナ。ルート要素になることができるもの。</d>
@@ -63,6 +63,9 @@
     </sec>
   </sec>
   <sec><!--==================================================================-->
-    <title></title>
+    <title>LICENSE</title>
+    <d>
+      MIT
+    </d>
   </sec>
 </sec>
