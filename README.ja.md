@@ -48,6 +48,8 @@ XML 要素として書きます。
 
 このとき、名前空間はデフォルトのもので構いません。(むしろ名前空間を厳格に扱ってはいません)
 
+現状、サポートしている要素は `img` です。
+
 ### Markdown Elements
 
 TextNode は Markdown ですが、dxml パーサは `[remark](https://github.com/remarkjs/remark)` を通し
@@ -63,5 +65,4 @@ This is new paraguraph.
 ```
 これは殆どの場合には不要なテクニックですが、この例のように
 HTML 要素に続くパラグラフを別のものとして扱いたい場合などに使えます。
-
 

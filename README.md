@@ -29,11 +29,12 @@ this don't provide regular way to install.
 
 #### `<sec>`
 
-すべての文書の基本的なコンテナ。ルート要素になることができるもの。
+A basic container for any document. It can also serve as the root element.
 
-`<sec>`はネストすることができ、ネストによりレベルを示すことができる。
+Nested `<sec>` elements define the document's section levels.
 
-ルート要素の `lang` 属性は`<d>`要素のデフォルトの同属性の値となる。
+The `lang` attribute on the root element sets the default language for
+all nested `<d>` elements.
 
 #### `<title>`
 
@@ -52,6 +53,8 @@ XML 要素として書きます。
 
 このとき、名前空間はデフォルトのもので構いません。(むしろ名前空間を厳格に扱ってはいません)
 
+現状、サポートしている要素は `img` です。
+
 ### Markdown Elements
 
 TextNode は Markdown ですが、dxml パーサは `[remark](https://github.com/remarkjs/remark)` を通し
@@ -67,5 +70,4 @@ This is new paraguraph.
 ```
 これは殆どの場合には不要なテクニックですが、この例のように
 HTML 要素に続くパラグラフを別のものとして扱いたい場合などに使えます。
-
 

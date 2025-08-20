@@ -57,9 +57,25 @@
       <title>Unique Elements</title>
       <sec>
         <title>`&lt;sec&gt;`</title>
-        <d>すべての文書の基本的なコンテナ。ルート要素になることができるもの。</d>
-        <d>`&lt;sec&gt;`はネストすることができ、ネストによりレベルを示すことができる。</d>
-        <d>ルート要素の `lang` 属性は`&lt;d&gt;`要素のデフォルトの同属性の値となる。</d>
+        <d>
+          すべての文書の基本的なコンテナ。ルート要素になることができるもの。
+          <d lang="en">
+            A basic container for any document. It can also serve as the root element.
+          </d>
+        </d>
+        <d>
+          `&lt;sec&gt;`はネストすることができ、ネストによりレベルを示すことができる。
+          <d lang="en">
+            Nested `&lt;sec&gt;` elements define the document's section levels.
+          </d>
+        </d>
+        <d>
+          ルート要素の `lang` 属性は`&lt;d&gt;`要素のデフォルトの同属性の値となる。
+          <d lang="en">
+            The `lang` attribute on the root element sets the default language for
+            all nested `&lt;d&gt;` elements.
+          </d>
+        </d>
       </sec>
       <sec>
         <title>`&lt;title&gt;`</title>
@@ -79,6 +95,9 @@
       </d>
       <d>
         このとき、名前空間はデフォルトのもので構いません。(むしろ名前空間を厳格に扱ってはいません)
+      </d>
+      <d>
+        現状、サポートしている要素は `img` です。
       </d>
     </sec>
     <sec>
