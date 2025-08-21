@@ -41,18 +41,24 @@ function prepareTextNode(tn: Text) : DocumentFragment {
   return R;
 }
 
+//let depth = 0;
 export function prepareDxmlElement(elem: Element) : Element{
   const doc = elem.ownerDocument;
+  //console.log('  '.repeat(depth++) + 'src>>>', asDomlibDSL(elem));
   const result = elem.cloneNode() as Element;
   while(result.firstChild) result.removeChild(result.firstChild);
   for( const cn of elem.childNodes ){
     if(cn.nodeType === doc.ELEMENT_NODE){
       result.appendChild(prepareDxmlElement(cn as Element));
     }else if(cn.nodeType === doc.TEXT_NODE){
-      result.appendChild(prepareTextNode(cn as Text));
+      //console.log('  '.repeat(depth) + ' >' + cn.textContent);
+      const prepared = prepareTextNode(cn as Text);
+      //console.log("  ".repeat(depth) + ' !' , asDomlibDSL(prepared));
+      result.appendChild(prepared);
     }else{
       /* ignore */
     }
   }
+  //console.log('  '.repeat(--depth) + 'dst>>>', asDomlibDSL(result));
   return result;
 }

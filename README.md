@@ -57,7 +57,7 @@ XML 要素として書きます。
 
 ### Markdown Elements
 
-TextNode は Markdown ですが、dxml パーサは `[remark](https://github.com/remarkjs/remark)` を通し
+TextNode は Markdown ですが、dxml パーサは  [remark](https://github.com/remarkjs/remark)  を通し
 POJO AST 化したものを、機械的に XML に変換します。
 
 その為それによって生成され得る要素は dxml 内に直接書くことができます。たとえば以下のようにです。

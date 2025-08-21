@@ -3,14 +3,14 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 
 export function parseMarkdownToAst(markdownText: string) {
-  const file = unified()
+  return unified()
     .use(remarkParse)
     .use(remarkGfm)
     .parse(markdownText);
-  return file;
 }
 
 type AstNodeType = {type: string, children?: AstNodeType[], value?: string, [key:string]:unknown};
+
 export function ast2dom(doc:Document, node: AstNodeType):Node{
   const ns   = doc.documentElement.namespaceURI as string;
   const type = node.type;
@@ -24,13 +24,26 @@ export function ast2dom(doc:Document, node: AstNodeType):Node{
       R.setAttribute(key, String(value));
     }
   }
-  for(const c of node.children ?? []) R.appendChild(ast2dom(doc, c));
+
+  //if(type === 'list') console.log('>>>>', JSON.stringify(node));
+
+  for(const c of node.children ?? []){
+    //if(type === 'list') console.log('-->', JSON.stringify(c));
+    R.appendChild(ast2dom(doc, c));
+  }
+
   return R;
 }
 
 export function xmlifyMd(doc:Document, text: string):DocumentFragment{
   const R = doc.createDocumentFragment();
-  const root = ast2dom(doc, parseMarkdownToAst(text) as AstNodeType);
-  for(const node of root.childNodes) R.appendChild(node);
+  const ast = parseMarkdownToAst(text) as AstNodeType;
+  const root = ast2dom(doc, ast);
+  let node = root.firstChild;
+  while(node){
+    const next = node.nextSibling;
+    R.appendChild(node);
+    node = next;
+  }
   return R;
 }

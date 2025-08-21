@@ -22,9 +22,15 @@ export function builtinStyles(_window: IWindow): {[key:string]:DOMProcessor}{
         {
           element: 'list',
           action(n:Node){
+            //console.log('  '.repeat(context.current.indentDepth) + '>>' , context.current.indentDepth);
             const ordered = (n as Element).getAttribute('ordered') !== 'true' ? null : 1;
-            return context.withContext((pre)=>({...pre, ordered, indentDepth: pre.indentDepth+1 }),
-              ()=> this.processChildren(n) as string ); } },
+            const rs = context.withContext((pre)=>({...pre, ordered, indentDepth: pre.indentDepth+1 }),
+              ()=>{
+                //console.log('  '.repeat(context.current.indentDepth) + '--' , context.current.indentDepth);
+                return this.processChildren(n) as string;
+              });
+            //console.log('  '.repeat(context.current.indentDepth) + '<<' , context.current.indentDepth);
+            return rs; } },
         {
           element: 'title',
           action(n:Node){
@@ -41,11 +47,13 @@ export function builtinStyles(_window: IWindow): {[key:string]:DOMProcessor}{
         {
           element: 'listItem',
           action(n:Node){
-            const indent = '  '.repeat(context.current.indentDepth);
-            const bullet = indent + (context.current.ordered === null ? '-' : (context.current.ordered++ + '.')) + " ";
+            const bullet = (context.current.ordered === null ? '-' : (context.current.ordered++ + '.')) + " ";
             const fIndent = ' '.repeat(bullet.length + 1);
             const children = String(this.processChildren(n)).replace(/\n*$/, '').replace(/\n/g, '\n'+ fIndent);
-            return (bullet+" " + children).replace(/\n*$/, "\n\n");}},
+            const withoutIndent =  (bullet+" " + children).replace(/\n*$/, "\n\n");
+
+            if( context.current.indentDepth > 1) return withoutIndent;
+            return '  ' + withoutIndent.replace(/\n/g, '\n  ').replace(/ +$/,''); }},
         {
           element: 'img',
           action(n:Node){
@@ -54,13 +62,18 @@ export function builtinStyles(_window: IWindow): {[key:string]:DOMProcessor}{
         },
         {
           element: 'link',
-          action(n:Node){ return ' [' + this.processChildren(n) + '](' + (n as Element).getAttribute('url') + ') ' } },
+          action(n:Node){
+            return ' [' + this.processChildren(n) + '](' + (n as Element).getAttribute('url') + ') ' } },
         {
           element: 'inlineCode',
           action(n:Node){ return '`' + this.processChildren(n) + '`'; } },
         {
+          element: 'html',
+          action(n:Node){ return n.textContent ?? ''; }},
+        {
           element: 'paragraph',
-          action(n:Node){ return String(this.processChildren(n)).replace(/^\s*/,'').replace(/\s*$/, '\n\n'); } },
+          action(n:Node){
+            return String(this.processChildren(n)).replace(/^\s*/,'').replace(/\s*$/, '\n\n'); } },
         ... DOM2TextProcessor.basicRules );})(), // end of md
   }
 }
